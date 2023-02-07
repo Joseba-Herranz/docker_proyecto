@@ -1,14 +1,14 @@
 var show = new Array;
     show[0] =  '<img id="0" src="img/bbva.png" alt="BBVA" onclick="grafico(this)"> ';
-    show[1] =  '<img id="1" src="img/caixa.png" alt="Caixa"> ';
-    show[2] =  '<img id="2" src="img/cellnex.png" alt="Cellnex"> ';
-    show[3] =  '<img id="3" src="img/ferrovial.png" alt="Ferrovial"> ';
-    show[4] =  '<img id="4" src="img/iberdrola.png" alt="Iberdrola"> ';
-    show[5] =  '<img id="5" src="img/inditex.png" alt="Inditex"> ';
-    show[6] =  '<img id="6" src="img/naturgy.png" alt="Naturgy"> '; 
-    show[7] =  '<img id="7" src="img/repsol.png" alt="Repsol"> ';
-    show[8] =  '<img id="8" src="img/santander.png" alt="Santander"> ';
-    show[9] =  '<img id="9" src="img/telefonica.png" alt="Telefonica"> ';
+    show[1] =  '<img id="1" src="img/caixa.png" alt="Caixa" onclick="grafico(this)"> ';
+    show[2] =  '<img id="2" src="img/cellnex.png" alt="Cellnex" onclick="grafico(this)"> ';
+    show[3] =  '<img id="3" src="img/ferrovial.png" alt="Ferrovial" onclick="grafico(this)"> ';
+    show[4] =  '<img id="4" src="img/iberdrola.png" alt="Iberdrola" onclick="grafico(this)"> ';
+    show[5] =  '<img id="5" src="img/inditex.png" alt="Inditex" onclick="grafico(this)"> ';
+    show[6] =  '<img id="6" src="img/naturgy.png" alt="Naturgy" onclick="grafico(this)"> '; 
+    show[7] =  '<img id="7" src="img/repsol.png" alt="Repsol" onclick="grafico(this)"> ';
+    show[8] =  '<img id="8" src="img/santander.png" alt="Santander" onclick="grafico(this)"> ';
+    show[9] =  '<img id="9" src="img/telefonica.png" alt="Telefonica" onclick="grafico(this)"> ';
 
 var imagesId = []; //localStorage
 var storedImagesId = JSON.parse(localStorage.getItem("imagesId"));
@@ -70,12 +70,6 @@ $(function () {
         localStorage.removeItem(ui.draggable.attr('id'));
         }
     });
-
-    // $("#0").click(function () {
-    //     // console.log("click");
-    //     $("#menuDesplegable").toggle();
-    //   });
-
 });
 
 function guardado(){
@@ -85,10 +79,6 @@ function guardado(){
     const mostrar = document.getElementById('mostrar');
     
     var toShow = `<button id="show" class="btn btn-info" onclick="opciones()">Seleccionar otra vez</button>` + "<br>";
-    // toShow += `<div id="menuDesplegable" style="display: none;">`;
-    // toShow += `<button>Botón 1</button>`;
-    // toShow += `<button>Botón 2</button>`;
-    // toShow += `<button>Botón 3</button>`;
     toShow += `<div id="container"></div>`;
     // toShow += `</div>`;
     toShow += `<div class="d-flex flex-wrap">`;
@@ -113,7 +103,6 @@ function getValor(){
     // // console.log("hola");
     // // console.log("api");
     // const controller = new AbortController();
-    let anterior = null;
     const options = {method: 'GET'};
 
     fetch('http://127.0.0.1:8000/api/mostrar', options)
@@ -124,16 +113,12 @@ function getValor(){
             // // console.log(`valor${element.empresa_id}`);
             if(van != null){
                 // van.innerHTML = `<strong>${element.valor}€</strong>`;
-                if(anterior !=null){
-                    if(element.valor > anterior){
-                        van.innerHTML = `${element.valor}€`;
-                        document.getElementById('valor').style.color = "green";
-                    }else if(element.valor > anterior){
-                        van.innerHTML = `${element.valor}€`;
-                        document.getElementById('valor').style.color = "red";
-                    }
-                }else{
+                if(element.SoB == 1){
                     van.innerHTML = `${element.valor}€`;
+                    document.getElementById('valor').style.color = "green";
+                }else {
+                    van.innerHTML = `${element.valor}€`;
+                    document.getElementById('valor').style.color = "red";
                 }
             }
             previousValue = element.valor;
@@ -147,4 +132,3 @@ function opciones(){
     document.getElementById("arriba").style.display = "block";
     document.getElementById("abajo").style.display = "none";
 }
-

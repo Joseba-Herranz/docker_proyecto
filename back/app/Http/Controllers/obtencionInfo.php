@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\modificador;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\infoBolsa;
 
 
 class obtencionInfo extends Controller
@@ -45,55 +47,22 @@ class obtencionInfo extends Controller
         ]);
     }
 
+    public function creacion()
+    {
+        $model = new infoBolsa();
+        $model->generador();
 
-    // public function generador(){
-    //     $id = DB::table('empresas')
-    //     for ($j = 0; $j <= 9; $j++) {
-    //         $fechaInicial = Carbon::parse('2022-01-01 12:35:35');
-    //         $valor = 15;
-    //             $fechaDB = DB::table('valores')
-    //                 ->where('empresa_id', $j)
-    //                 ->orderBy('fecha', 'desc')
-    //                 ->first();
-    //                 if($fechaDB != null){
-    //                     $fechaInicial = $fechaDB->fecha;
-    //                     $valor = $fechaDB->valor;
-    //                 }
-                    
-    //         $fechaActual = Carbon::now();
-
-    //         while ($fechaInicial <= $fechaActual) {
-      
-    //             $variacion = mt_rand(1, 10) / 100;
-
-    //             $resto = $valor * $variacion;
-
-    //             $SoB = mt_rand(1, 2);
-
-    //             if ($valor < 0.3) {
-    //                 $SoB = 1;
-    //             }
-
-    //             if ($SoB == 1) { //Subida
-    //                 $valor = $valor + $resto;
-    //             } else if ($SoB == 2) { //Bajada
-    //                 $valor = $valor - $resto;
-    //             }
-
-    //             DB::table('valores')->insert([
-    //                 'empresa_id' => $j,
-    //                 'fecha' => $fechaInicial->toDateTimeString(),
-    //                 'valor' => $valor
-    //             ]);
-    //         }
-    //         if ($fechaInicial <= Carbon::now()->subWeek()) {
-    //             $fechaInicial->addDay();
-    //         } else {
-    //             $fechaInicial->addMinute();
-    //         }
-    //     }
-    //         return response()->json([
-    //             'true' => true
-    //         ]);
-    // }
+        $data = array();
+        $id = DB::table('empresas')->count();
+            
+        for($x = 0; $x < $id; $x++) {
+        
+            $data[$x] = DB::table('valores')->where('empresa_id', $x);
+        
+        }
+        // return modificador::collection($datos);
+        return response()->json([
+            'data' => $data
+        ]);
+    }
 }

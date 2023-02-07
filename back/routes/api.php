@@ -24,6 +24,6 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-Route::get('mostrar', [obtencionInfo::class,'mostrarValores']);
+Route::get('mostrar', [obtencionInfo::class, 'mostrarValores']);
 Route::post('grafico', [obtencionInfo::class, 'grafico']);
-Route::get('generador', [obtencionInfo::class,'generador']);
+Route::get('creacion', [obtencionInfo::class, 'creacion']);
