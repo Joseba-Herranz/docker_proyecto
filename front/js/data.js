@@ -23,7 +23,6 @@ function grafico(img){
                         var data = [element.fecha, element.valor];
                         mostrarGraf(data, nombre)}))
                 .catch(error => console.error(error.message));
-
     }
 
 function mostrarGraf(info, nombre){

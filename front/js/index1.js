@@ -72,6 +72,14 @@ $(function () {
     });
 });
 
+//   <legend>edad</legend>
+//   <input type='checkbox' tabindex='20'
+//             name='edad' value='20-39' > 20-39
+//   <input type='checkbox' tabindex='21'
+//             name='edad' value='40-59' > 40-59
+//   <input type='checkbox' tabindex='22'
+//             name='edad' value='60-79' > 60-79
+//  </fieldset>
 
 
 function guardado(){
@@ -80,7 +88,8 @@ function guardado(){
     console.log("guardado");
     const mostrar = document.getElementById('mostrar');
     
-    var toShow = `<button id="show" class="btn btn-info" onclick="opciones()">Seleccionar otra vez</button>` + "<br>"+"<br>";
+    var toShow = `<button id="show" class="btn btn-info" onclick="opciones()">Seleccionar otra vez</button>` + "<br>";
+    toShow += '<fieldset>' +"<br>";
     toShow += `<div id="container"></div>`;
     toShow += `<div class="d-flex flex-wrap">`;
     for(let x=0; x<10; x++){
@@ -94,12 +103,14 @@ function guardado(){
         }
     }
     toShow += `</div>`;
-    mostrar.innerHTML = toShow;    
+    mostrar.innerHTML = toShow;
+    console.log("hola");    
     getValor();
     setInterval(getValor, 6000);
 }
 
 function getValor(){
+    console.log("hola");
     // console.log("api");
     // const controller = new AbortController();
     let anterior = null;
@@ -108,7 +119,7 @@ function getValor(){
     fetch('http://127.0.0.1:8000/api/mostrar', options)
     .then(response => response.json())
     .then(response => { response.data.forEach(element => {
-
+            console.log("hola");
             var van = document.getElementById(`valor${element.empresa_id}`);
             
             if(van != null){
@@ -129,7 +140,6 @@ function getValor(){
         });
     })
     .catch(err => console.error(err));
-    // controller.abort();
 }
 
 function opciones(){
