@@ -1,7 +1,7 @@
 function vistaPrev(){
     for(var x=0; x<10; x++){
         if(localStorage.getItem(x)!=null){
-            console.log(localStorage.getItem(x));
+            // console.log(localStorage.getItem(x));
             document.getElementById(x).style.display = "none";
             document.getElementById('fin').innerHTML += show[x];
         }
@@ -44,8 +44,7 @@ function generador(){
         redirect: 'follow'
       };
       
-      fetch("http://127.0.0.1:8000/api/creacion", requestOptions)
+      fetch("http://hz114496:1912/api/creacion", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
         .catch(error => console.log('error', error));
 }

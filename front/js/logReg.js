@@ -17,7 +17,7 @@ function login(){
       redirect: 'follow'
     };
     
-    fetch("http://127.0.0.1:8000/api/login", requestOptions)
+    fetch("http://hz114496:1912/api/login", requestOptions)
       .then(response => response.json())
       .then(result => {
         localStorage.setItem("token", result['authorisation']['token']);
@@ -51,7 +51,7 @@ function registro(){
     redirect: 'follow'
     };
 
-    fetch("http://127.0.0.1:8000/api/register", requestOptions)
+    fetch("http://hz114496:1912/api/register", requestOptions)
     .then(response => response.json())
     .then(result => {
         localStorage.setItem("token", result['authorisation']['token']);

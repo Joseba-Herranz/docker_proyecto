@@ -75,12 +75,11 @@ $(function () {
 function guardado(){
     document.getElementById("arriba").style.display = "none";
     document.getElementById("abajo").style.display = "block";
-    // // console.log("guardado");
+    //  console.log("guardado");
     const mostrar = document.getElementById('mostrar');
     
     var toShow = `<button id="show" class="btn btn-info" onclick="opciones()">Seleccionar otra vez</button>` + "<br>";
     toShow += `<div id="container"></div>`;
-    // toShow += `</div>`;
     toShow += `<div class="d-flex flex-wrap">`;
     for(let x=0; x<10; x++){
         if(localStorage.getItem(x)!=null){
@@ -93,32 +92,33 @@ function guardado(){
         }
     }
     toShow += `</div>`;
-    mostrar.innerHTML = toShow;
-    // // console.log("hola");    
+    mostrar.innerHTML = toShow;  
     getValor();
-    setInterval(getValor, 6000);
+    setInterval(getValor, 60000);
 }
 
 function getValor(){
-    // // console.log("hola");
-    // // console.log("api");
-    // const controller = new AbortController();
     const options = {method: 'GET'};
 
-    fetch('http://127.0.0.1:8000/api/mostrar', options)
+    fetch('http://hz114496:1912/api/mostrar', options)
     .then(response => response.json())
     .then(response => { response.data.forEach(element => {
-            // // console.log("hola");
             var van = document.getElementById(`valor${element.empresa_id}`);
-            // // console.log(`valor${element.empresa_id}`);
+            // console.log(`valor${element.empresa_id}`);
             if(van != null){
                 // van.innerHTML = `<strong>${element.valor}€</strong>`;
                 if(element.SoB == 1){
                     van.innerHTML = `${element.valor}€`;
-                    document.getElementById('valor').style.color = "green";
+                    document.getElementById(`valor${element.empresa_id}`).style.color = "green";
+                    setTimeout(function() {
+                        document.getElementById(`valor${element.empresa_id}`).style.color = "black";
+                    }, 3000);
                 }else {
                     van.innerHTML = `${element.valor}€`;
-                    document.getElementById('valor').style.color = "red";
+                    document.getElementById(`valor${element.empresa_id}`).style.color = "red";
+                    setTimeout(function() {
+                        document.getElementById(`valor${element.empresa_id}`).style.color = "black";
+                    }, 3000);
                 }
             }
             previousValue = element.valor;
@@ -128,7 +128,6 @@ function getValor(){
 }
 
 function opciones(){
-    // // console.log("dentro");
     document.getElementById("arriba").style.display = "block";
     document.getElementById("abajo").style.display = "none";
 }

@@ -1,26 +1,26 @@
 version: '3'
 services:
-  frontend:
+  web:
     build: ./front
     ports:
       - 1911:80
     networks:
-      - red
+      - default
     
   
-  backend:
+  api:
     build: ./back
     ports: 
       - 1912:80
     networks:
-      - red
+      - default
 
-  backend1:
+  api1:
     build: ./back
     ports:
       - 1913:80
     networks:
-      - red
+      - default
   
   nginx:
     image: nginx
@@ -29,15 +29,14 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     networks:
-      - red
+      - default
     depends_on:
-      - backend
-      - backend1
-      - frontend
-      - phpmyadmin
-
+      - api
+      - api1
+      - web
+      - mysql
       
-  db:
+  database:
     image: mysql:latest 
     environment:
       MYSQL_DATABASE: bolsa
@@ -47,9 +46,9 @@ services:
        - ./db:/docker-entrypoint-initdb.d
 
     networks:
-      - red
+      - default
 
-  phpmyadmin:
+  mysql:
     image: phpmyadmin/phpmyadmin
     ports:
       - 1914:80
@@ -58,10 +57,10 @@ services:
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
     networks:
-      - red
+      - default
     depends_on:
-      - db
+      - database
 
 networks:
-  red:
+  default:
     driver: bridge

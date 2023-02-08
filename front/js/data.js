@@ -1,8 +1,8 @@
 function grafico(img){
         var id = img.id;
         var nombre = img.alt;
-        // console.log(id);
-        // console.log(nombre);
+        console.log(id);
+        console.log(nombre);
 
           var dId = { id: id };
         
@@ -13,38 +13,31 @@ function grafico(img){
             redirect: 'follow'
           };
             
-            fetch("http://127.0.0.1:8000/api/grafico", requestOptions)
+            fetch("http://hz114496:1912/api/grafico", requestOptions)
                 .then(res => res.json())
-                .then(result => graf(result,nombre))
+                .then(result => graf(result,id,nombre))
                 .catch(error => console.error(error.message));
     }
 
-
-
-function graf(result,nombre){
+function graf(result,id,nombre){
+    console.log(result['data'])
     let data = [];
-    let valores = [];
-    let tiempo = [];
-    result['data']['data'].forEach(element =>{
-        
-        data[element['id']] = [element['fecha'],element['valor']];
-        // valores = [element['valor']];
-        // tiempo = [element['fecha']];
+    result['data'].forEach(element =>{
+        if (element['empresa_id'] == id) {
+          let fecha = new Date(element['fecha'])
+          let date = fecha.getTime();
+          data.push([date,element['valor']]);
+        }
     });
-
-
     mostrarGraf(data, nombre)
 }
 
 function mostrarGraf(data, nombre){
+  console.log('pasa por aqui', data)
 //   Highcharts.getJSON(info , function (data) {
   Highcharts.stockChart('container', {
     title: {
       text: 'valor de '+nombre
-    },
-
-    subtitle: {
-      text: 'Using ordinal X axis'
     },
 
     xAxis: {
@@ -61,8 +54,7 @@ function mostrarGraf(data, nombre){
         count: 1,
         text: '1D'
       }, {
-        type: 'all',
-        count: 1,
+        type: 'all', 
         text: 'All'
       }],
       selected: 1,
@@ -92,30 +84,6 @@ function mostrarGraf(data, nombre){
       threshold: null
     }]
   });
-// });
-
-// Highcharts.getJSON(info, function (data) {
-
-    //Create the chart
-    // Highcharts.stockChart('container', {
-
-    //     rangeSelector: {
-    //         selected: tiempo
-    //     },
-
-    //     title: {
-    //         text: 'AAPL Stock Price'+nombre
-    //     },
-
-    //     series: [{
-    //         name: 'AAPL Stock Price',
-    //         data: valor,
-    //         step: true,
-    //         tooltip: {
-    //             valueDecimals: 2
-    //         }
-    //     }]
-    // });
 // });
 
 } 

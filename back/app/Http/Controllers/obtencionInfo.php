@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Resources\modificador;
+// use App\Http\Resources\modificador;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+// use Carbon\Carbon;
 use App\Models\infoBolsa;
 
 
@@ -23,7 +23,6 @@ class obtencionInfo extends Controller
             'data' => $data
         ]);
 
-        
     }
 
     public function grafico(Request $request)
@@ -33,15 +32,13 @@ class obtencionInfo extends Controller
         ]);
 
         $id = $request->input('id');
-        // $query = "SELECT * FROM valores WHERE empresa_id = '".$id."'"; 
-        // $data = DB::select($query)->take(1000);
-        
-        // $data = $data->skip(10)->take(1000)->get();
-        
-        $data = DB::table('valores')
-          ->where('empresa_id', $id)
-          ->paginate(1000);
 
+        // $data = DB::table('valores')
+        //     ->where('empresa_id', $id)
+        //   ->paginate(1000);
+        $query = "SELECT * FROM valores WHERE empresa_id = $id AND HOUR(fecha) > 9 AND HOUR(fecha) < 17 AND (id % 2)";
+        $data = DB::select($query);
+        // $data = DB::table('valores')->where('empresa', $id);
         return response()->json([
             'data' => $data
         ]);
