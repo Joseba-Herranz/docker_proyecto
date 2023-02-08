@@ -13,6 +13,9 @@ class infoBolsa extends Model
 {
     use HasFactory;
 
+    protected $table = 'empresas';
+
+
     public function generador(){
        
         $id = DB::table('empresas')->count();
