@@ -29,73 +29,55 @@ function graf(result,id,nombre){
 }
 
 function mostrarGraf(data, nombre){
-  // console.log('pasa por aqui', data)
-  // Highcharts.stockChart('container', {
-  //   title: {
-  //     text: 'valor de '+nombre
-  //   },
-
-  //   xAxis: {
-  //     gapGridLineWidth: 0
-  //   },
-
-  //   rangeSelector: {
-  //     buttons: [{
-  //       type: 'hour',
-  //       count: 1,
-  //       text: '1h'
-  //     }, {
-  //       type: 'day',
-  //       count: 1,
-  //       text: '1D'
-  //     }, {
-  //       type: 'all', 
-  //       text: 'All'
-  //     }],
-  //     selected: 1,
-  //     inputEnabled: false
-  //   },
-
-  //   series: [{
-  //     name: nombre,
-  //     type: 'area',
-  //     data: data,
-  //     gapSize: 5,
-  //     tooltip: {
-  //       valueDecimals: 2
-  //     },
-  //     fillColor: {
-  //       linearGradient: {
-  //         x1: 0,
-  //         y1: 0,
-  //         x2: 0,
-  //         y2: 1
-  //       },
-  //       stops: [
-  //         [0, Highcharts.getOptions().colors[0]],
-  //         [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-  //       ]
-  //     },
-  //     threshold: null
-  //   }]
-  // });
-
   Highcharts.stockChart('container', {
-    rangeSelector: {
-      selected: 1
+    title: {
+      text: 'valor de '+nombre
     },
 
-    title: {
-      text: 'AAPL Stock Price'
+    xAxis: {
+      gapGridLineWidth: 0
+    },
+
+    rangeSelector: {
+      buttons: [{
+        type: 'hour',
+        count: 1,
+        text: '1h'
+      }, {
+        type: 'day',
+        count: 1,
+        text: '1D'
+      }, {
+        type: 'all', 
+        text: 'All'
+      }],
+      selected: 1,
+      inputEnabled: false
     },
 
     series: [{
-      name: 'AAPL',
+      name: nombre,
+      type: 'area',
       data: data,
+      gapSize: 5,
       tooltip: {
         valueDecimals: 2
-      }
+      },
+      fillColor: {
+        linearGradient: {
+          x1: 0,
+          y1: 0,
+          x2: 0,
+          y2: 1
+        },
+        stops: [
+          [0, Highcharts.getOptions().colors[0]],
+          [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+        ]
+      },
+      threshold: null
     }]
   });
+
 
 } 
