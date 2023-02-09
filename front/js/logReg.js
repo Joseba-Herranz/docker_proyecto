@@ -59,7 +59,9 @@ function registro(){
         document.getElementById("form").style.display = "none";
         document.getElementById("contenido").style.display = "block";
     })
-    .catch(error => console.log('error', error));
+    .catch(error => {
+      alert("El correo que esta usando esta en uso o su contraseña es menor del minimo");
+    });
 }
 
 ////////////

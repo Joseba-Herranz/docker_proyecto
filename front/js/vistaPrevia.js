@@ -1,7 +1,6 @@
 function vistaPrev(){
     for(var x=0; x<10; x++){
         if(localStorage.getItem(x)!=null){
-            // console.log(localStorage.getItem(x));
             document.getElementById(x).style.display = "none";
             document.getElementById('fin').innerHTML += show[x];
         }
@@ -35,7 +34,7 @@ function vistaPrev(){
     });
 
     generador();
-    setInterval(generador, 6000);
+    setInterval(generador, 60000);
 }
 
 function generador(){

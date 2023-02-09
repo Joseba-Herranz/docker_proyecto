@@ -10,9 +10,6 @@ var show = new Array;
     show[8] =  '<img id="8" src="img/santander.png" alt="Santander" onclick="grafico(this)"> ';
     show[9] =  '<img id="9" src="img/telefonica.png" alt="Telefonica" onclick="grafico(this)"> ';
 
-var imagesId = []; //localStorage
-var storedImagesId = JSON.parse(localStorage.getItem("imagesId"));
-
 $(function () {
     
     $("#inicio img").draggable({
@@ -28,22 +25,16 @@ $(function () {
         }
     });
 
-    var x=0;
 
     $("#fin").droppable({
         drop: function (event, ui) {
             if ($("#fin img").length == 0) {
                 $("#fin").html("");
             }
-            // // console.log(ui.draggable.attr('id'));
             ui.draggable.addClass("dropped");
             $("#fin").append(ui.draggable);
             
-            imagesId.push(ui.draggable.attr('id'));
-            // // console.log(ui.draggable.attr('alt'));
             localStorage.setItem(ui.draggable.attr('id'), ui.draggable.attr('id'));
-            // // console.log(localStorage.getItem(ui.draggable.attr('id')));
-            x++;
             
         }
     });
@@ -104,9 +95,7 @@ function getValor(){
     .then(response => response.json())
     .then(response => { response.data.forEach(element => {
             var van = document.getElementById(`valor${element.empresa_id}`);
-            // console.log(`valor${element.empresa_id}`);
             if(van != null){
-                // van.innerHTML = `<strong>${element.valor}€</strong>`;
                 if(element.SoB == 1){
                     van.innerHTML = `${element.valor}€`;
                     document.getElementById(`valor${element.empresa_id}`).style.color = "green";
